@@ -10,18 +10,14 @@
 
 ```
 git clone git@gitlab.com:re_build-bootcamp/1-term-B.git
-```
 
-### リモートリポジトリを取り込む
+cd 1-term-B
 
-```
-git pull
-```
+// developブランチを作り移動する
+git checkout -b develop
 
-### developブランチに移動
-
-```
-git checkout develop
+// GitLabのdevelopブランチを取り込む
+git pull origin develop
 ```
 
 ### developブランチで環境構築する
@@ -57,13 +53,13 @@ php artisan ui vue --auth
 
 ```
 次に、package.jsonを開き、sass-loaderのバージョンを変更する。
-Laravelライブラリのvar-dumperとの互換性を合わせないと`npm run dev`を実行した際にエラーになる
+Laravel Mixのバージョンとの互換性を合わせないと`npm run dev`を実行した際にエラーになる
 
 `"sass-loader": "^8.0.0" => "sass-loader": "^7.3.1"`に変更
 
 npm installでnode_modulesファイルにフロントエンドで使用するパッケージがインストールされます。
 ```
-npm insatall
+npm install
 
 npm run dev
 ```
@@ -71,5 +67,5 @@ npm run dev
 
 ### URL
 - [localhost](http://localhost:80)
-- [phpMyadmin](http:localhost:8888)
+- [phpMyadmin](http:localhost:8888) user名:root pass:secret
 - [mailhog](http://localhost:8025)
