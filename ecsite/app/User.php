@@ -48,19 +48,21 @@ class User extends Authenticatable
                           bool $presidentkStatus
     ): bool
     {
-        // 社長チェックOKの場合
-        if ($presidentkStatus === true) {
-            $result = true;
-            return $result;
-        }
-        // 課長チェックOKの場合
-        if ($ManagerCheckStatus === true) {
-            $result = false;
-            return $result;
-        }
         // 社員チェックOKの場合
         if ($employeeCheckStatus === true) {
             $result = false;
+            return $result;
+        }
+
+        // 課長チェックOKの場合
+        if ($employeeCheckStatus === true && $ManagerCheckStatus === true) {
+            $result = false;
+            return $result;
+        }
+
+        // 社長チェックOKの場合
+        if ($employeeCheckStatus === true && $ManagerCheckStatus === true && $presidentkStatus === true) {
+            $result = true;
             return $result;
         }
     }
