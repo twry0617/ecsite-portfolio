@@ -36,4 +36,32 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+ /**
+     * @param bool $employeeCheckStatus
+     * @param bool $ManagerCheckStatus
+     * @param bool $presidentkStatus
+     * @return bool
+     */
+    public function func1(bool $employeeCheckStatus,
+                          bool $ManagerCheckStatus,
+                          bool $presidentkStatus
+    ): bool
+    {
+        // 社長チェックOKの場合
+        if ($presidentkStatus === true) {
+            $result = true;
+            return $result;
+        }
+        // 課長チェックOKの場合
+        if ($ManagerCheckStatus === true) {
+            $result = false;
+            return $result;
+        }
+        // 社員チェックOKの場合
+        if ($employeeCheckStatus === true) {
+            $result = false;
+            return $result;
+        }
+    }
 }
