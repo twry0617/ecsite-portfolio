@@ -2,10 +2,17 @@
 
 namespace App\Http\Middleware;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
 class Authenticate extends Middleware
 {
+    /**
+     * supplierのログインURL
+     *
+     * @var string
+     */
+    protected $supplier_route = 'supplier.login';
     /**
      * Get the path the user should be redirected to when they are not authenticated.
      *
@@ -15,7 +22,9 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            return route('login');
+            if (Route::is('supplier.*')) {
+                return route($this->supplier_route);
+            }
         }
     }
 }

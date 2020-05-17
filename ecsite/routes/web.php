@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Route::namespace('Supplier')->prefix('supplier')->name('supplier.')->group(function () {
+    Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+    Route::middleware('auth:supplier')->group(function () {
+        Route::get('home', 'HomeController@index');
+    });
+});
