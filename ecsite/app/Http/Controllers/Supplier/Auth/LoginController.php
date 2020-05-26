@@ -41,6 +41,16 @@ class LoginController extends Controller
     }
 
     /**
+     * ログイン後のリダイレクト先
+     *
+     * @return url
+     */
+    public function redirectPath()
+    {
+        return $this->redirectTo;
+    }
+
+    /**
      * Guardの認証方法を指定
      *
      * @return void

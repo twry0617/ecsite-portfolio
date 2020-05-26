@@ -45,6 +45,16 @@ class RegisterController extends Controller
     }
 
     /**
+     * 新規登録後のリダイレクト先
+     *
+     * @return url
+     */
+    public function redirectPath()
+    {
+        return $this->redirectTo;
+    }
+
+    /**
      * Guardの認証方法を指定
      *
      * @return void
@@ -83,11 +93,11 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \App\Models\Supplier
      */
     protected function create(array $data)
     {
-        return User::create([
+        return Supplier::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
