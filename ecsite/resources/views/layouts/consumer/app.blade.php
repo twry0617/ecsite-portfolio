@@ -18,7 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style>body{background-color: #00FA9A;}</style>
+    <style>body{background-color: #87CEFA;}</style>
 </head>
 <body>
     <div id="app">
@@ -42,11 +42,11 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('supplier.login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('consumer.login') }}">{{ __('Login') }}</a>
                             </li>
-                            @if (Route::has('supplier.register'))
+                            @if (Route::has('consumer.register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('supplier.register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('consumer.register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -56,13 +56,13 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('supplier.logout') }}"
+                                    <a class="dropdown-item" href="{{ route('consumer.logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('supplier.logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('consumer.logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
                                 </div>

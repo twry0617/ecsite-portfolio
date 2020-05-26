@@ -18,7 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style>body{background-color: #00FA9A;}</style>
+    <style>body{background-color: #F0E68C;}</style>
 </head>
 <body>
     <div id="app">
@@ -42,11 +42,11 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('supplier.login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('manager.login') }}">{{ __('Login') }}</a>
                             </li>
-                            @if (Route::has('supplier.register'))
+                            @if (Route::has('manager.register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('supplier.register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('manager.register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -56,13 +56,13 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('supplier.logout') }}"
+                                    <a class="dropdown-item" href="{{ route('manager.logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('supplier.logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('manager.logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
                                 </div>
