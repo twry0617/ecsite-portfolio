@@ -17,13 +17,13 @@ class RouteServiceProvider extends ServiceProvider
     protected $namespace = 'App\Http\Controllers';
 
     // Supplierのリダイレクト先
-    public const SUPPLIER_HOME = '/supplier/home';
+    public const SUPPLIER_HOME = '/supplier/';
 
     // Consumerのリダイレクト先
-    public const CONSUMER_HOME = '/consumer/home';
+    public const CONSUMER_HOME = '/';
 
     // Managerのリダイレクト先
-    public const MANAGER_HOME = '/manager/home';
+    public const MANAGER_HOME = '/manager/';
 
     /**
      * Define your route model bindings, pattern filters, etc.

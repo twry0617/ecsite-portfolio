@@ -17,7 +17,7 @@
 |--------------------------------------------------------------------------
 */
 
-Route::namespace('Consumer')->prefix('consumer')->name('consumer.')->group(function () {
+Route::namespace('Consumer')->name('consumer.')->group(function () {
     Auth::routes();
 
 /*
@@ -27,7 +27,7 @@ Route::namespace('Consumer')->prefix('consumer')->name('consumer.')->group(funct
 */
 
     Route::middleware('auth:consumer')->group(function () {
-        Route::get('home', 'HomeController@index')->name('home');
+        Route::get('/', 'HomeController@index')->name('home');
     });
 
 });
@@ -48,7 +48,7 @@ Route::namespace('Supplier')->prefix('supplier')->name('supplier.')->group(funct
 */
 
     Route::middleware('auth:supplier')->group(function () {
-        Route::get('home', 'HomeController@index')->name('home');
+        Route::get('/', 'HomeController@index')->name('home');
     });
 
 });
@@ -70,7 +70,7 @@ Route::namespace('Manager')->prefix('manager')->name('manager.')->group(function
 */
 
     Route::middleware('auth:manager')->group(function () {
-        Route::get('home', 'HomeController@index')->name('home');
+        Route::get('/', 'HomeController@index')->name('home');
     });
 
 });
