@@ -39,7 +39,14 @@ Route::namespace('Consumer')->name('consumer.')->group(function () {
 */
 
 Route::namespace('Supplier')->prefix('supplier')->name('supplier.')->group(function () {
-    Auth::routes();
+    Auth::routes([
+        'register' => false,
+    ]);
+    Route::get('/invitation', 'InvitationController@emailVerificationForm');
+    Route::post('/invitation', 'InvitationController@emailVerification')->name('invitation');
+    Route::get('/register/verify/{token}', 'InvitationController@emailVerifyComplete')->name('register.verify');
+    Route::post('/verify/{token}', 'InvitationController@create')->name('register');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -70,7 +77,9 @@ Route::namespace('Manager')->prefix('manager')->name('manager.')->group(function
 */
 
     Route::middleware('auth:manager')->group(function () {
-        Route::get('/', 'HomeController@index')->name('home');
+        Route::get('/', 'HomeController@index');
+        Route::get('/invitation', 'InvitationController@emailVerificationForm');
+        ROute::post('/invitation', 'InvitationController@emailVerification')->name('invitation');
     });
 
 });
