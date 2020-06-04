@@ -2,8 +2,17 @@
 
 @section('content')
         @if (session('flash_message'))
-            <div class="flash_message">
+            <div class="mt-2 flash_message alert-info">
                 {{ session('flash_message') }}
+            </div>
+        @endif
+        @if ($errors->any())
+            <div class="mt-2 alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
         @endif
         <div class="justify-content-center flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
