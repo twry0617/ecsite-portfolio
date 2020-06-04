@@ -68,20 +68,6 @@ class InvitationController extends Controller
         return Auth::guard('supplier');
     }
 
-    // /**
-    //  * 本登録のバリデーション
-    //  *
-    //  * @param array $data
-    //  * @return Validator
-    //  */
-    // protected function create_validator(array $data)
-    // {
-    //     return Validator::make($data, [
-    //         'name' => 'required|string|max:255',
-    //         'password' => 'required|string|min:6|confirmed',
-    //     ]);
-    // }
-
     /**
      * 招待フォーム
      *
