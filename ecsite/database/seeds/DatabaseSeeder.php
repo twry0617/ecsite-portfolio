@@ -14,6 +14,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ConsumersTableSeeder::class,
             ManagersTableSeeder::class,
+            CategoriesTableSeeder::class,
+            Delivery_companiesTableSeeder::class,
+
             ]);
     }
 }
