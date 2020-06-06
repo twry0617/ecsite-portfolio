@@ -36,8 +36,9 @@ class EmailVerify extends Mailable
      */
     public function build()
     {
-        return $this->subject('【店舗】仮登録が完了しました。')
+
+        return $this->subject('新規登録リンク')
                     ->view('mail.pre_register')
-                    ->with(['token' => $this->emailVerification->token,]);
+                    ->with(['token' => $this->emailVerification->token]);
     }
 }
