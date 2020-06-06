@@ -46,7 +46,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('supplier.invitation') }}">{{ __('仮登録申請') }}</a>
+                                <a class="nav-link" href="{{ route('supplier.invitation') }}">{{ __('登録申請') }}</a>
                             </li>
                         @else
                             <li class="nav-item dropdown">
