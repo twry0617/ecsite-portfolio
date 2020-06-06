@@ -41,13 +41,20 @@ class InvitationController extends Controller
     }
 
     /**
-     * 招待フォーム
+     * 新規登録申請許可フォーム
      *
-     * @return view
+     * @param string $token
+     * @return View
      */
-    public function emailVerificationForm()
+    public function permissionForm(string $token)
     {
-        return view('manager.auth.invitation');
+        // 有効なtokenか確認
+        $emailVerification = EmailVerification::findByToken($token);
+        $email = $emailVerification->email;
+        return view('manager.auth.invitation', [
+            'email' => $email,
+            'token' => $token,
+        ]);
     }
 
     /**
@@ -75,5 +82,23 @@ class InvitationController extends Controller
         Mail::to($request->email)->send(new \App\Mail\EmailVerify($emailVerification));
 
         return back()->with('flash_message', '招待メールを送りました');
+    }
+
+    /**
+     * トークンが有効か確認し、supplier登録希望者へ遷移させる
+     *
+     * @param string $token
+     * @return view
+     */
+    public function permissionInvitation(Request $request)
+    {
+        // 有効なtokenか確認
+        $token = $request->token;
+        $emailVerification = EmailVerification::findByToken($token);
+        if (empty($emailVerification) || $emailVerification->isRegister()) {
+            return view('errors.email_verify');
+        }
+        Mail::to($emailVerification->email)->send(new \App\Mail\EmailVerify($emailVerification));
+        return back()->with('flash_message', '申請許可メールを送りました');
     }
 }

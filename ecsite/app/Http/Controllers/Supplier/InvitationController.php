@@ -73,19 +73,19 @@ class InvitationController extends Controller
      *
      * @return view
      */
-    public function emailVerificationForm()
+    public function invitationEmailForm()
     {
         return view('supplier.auth.invitation');
     }
 
     /**
-     * 仮登録
+     * 登録申請
      *
      * @param PreInvitationRegister $request
      * @param EmailVerification $emailVerification
      * @return view
      */
-    public function emailVerification(PreInvitationRegister $request, EmailVerification $emailVerification)
+    public function invitationEmail(PreInvitationRegister $request, EmailVerification $emailVerification, $hours = 1)
     {
         $emailVerification = EmailVerification::build($request->email);
         DB::beginTransaction();
@@ -100,9 +100,9 @@ class InvitationController extends Controller
                     'email' => $request->email
                 ])->withErrors(['error' => 'メールアドレスの登録に失敗しました。']);
         }
-        Mail::to($request->email)->send(new \App\Mail\EmailVerify($emailVerification));
+        Mail::to('ecsite@example.com')->send(new \App\Mail\InvitationMail($emailVerification));
 
-        return back()->with('flash_message', '招待メールを送りました');
+        return back()->with('flash_message', '登録申請を行いました');
     }
 
     /**
