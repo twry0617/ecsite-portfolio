@@ -11,10 +11,76 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+/*
+|--------------------------------------------------------------------------
+| Consumer 認証不要
+|--------------------------------------------------------------------------
+*/
+
+Route::namespace('Consumer')->name('consumer.')->group(function () {
+    Auth::routes();
+
+/*
+|--------------------------------------------------------------------------
+| Consumer 認証済み
+|--------------------------------------------------------------------------
+*/
+
+    Route::middleware('auth:consumer')->group(function () {
+        Route::get('/', 'HomeController@index')->name('home');
+    });
+
 });
 
-Auth::routes();
+/*
+|--------------------------------------------------------------------------
+| Supplier 認証不要
+|--------------------------------------------------------------------------
+*/
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::namespace('Supplier')->prefix('supplier')->name('supplier.')->group(function () {
+    Auth::routes([
+        'register' => false,
+    ]);
+    Route::get('/invitation', 'InvitationController@invitationEmailForm');
+    Route::post('/invitation', 'InvitationController@invitationEmail')->name('invitation');
+    Route::get('/register/verify/{token}', 'InvitationController@emailVerifyComplete')->name('register.verify');
+    Route::post('/register/verify/{token}', 'InvitationController@create')->name('register');
+
+
+/*
+|--------------------------------------------------------------------------
+| Supplier 認証済み
+|--------------------------------------------------------------------------
+*/
+
+    Route::middleware('auth:supplier')->group(function () {
+        Route::get('/', 'HomeController@index')->name('home');
+    });
+
+});
+/*
+|--------------------------------------------------------------------------
+| Manager 認証不要
+|--------------------------------------------------------------------------
+*/
+
+Route::namespace('Manager')->prefix('manager')->name('manager.')->group(function () {
+    Auth::routes([
+        'register' => false,
+    ]);
+
+/*
+|--------------------------------------------------------------------------
+| Mamager 認証済み
+|--------------------------------------------------------------------------
+*/
+
+    Route::middleware('auth:manager')->group(function () {
+        Route::get('/register/verify/{token}', 'InvitationController@emailVerifyComplete')->name('register.verify');
+        Route::get('/', 'HomeController@index');
+        Route::get('/permission/{token}', 'InvitationController@permissionForm');
+        ROute::post('/invitation', 'InvitationController@permissionInvitation')->name('invitation');
+    });
+
+});
