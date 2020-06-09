@@ -17,7 +17,7 @@ class ProductCategoryController extends Controller
     {
         $categories = Category::paginate(5);
 
-        return view('manager/category/category_index', ['categories' => $categories]);
+        return view('manager.category.category_index', ['categories' => $categories]);
     }
 
     /**

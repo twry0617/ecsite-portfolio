@@ -18,7 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style>body{background-color: #F0E68C;}</style>
+    <style>body{background-color: #FFFFFF;}</style>
 </head>
 <body>
     <div id="app">
@@ -80,16 +80,12 @@
                     </a>
                   </li>
                   <div class="dropdown">
-  <!-- 切替ボタンの設定 -->
-  <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    マスタ管理
-  </button>
-  <!-- ドロップメニューの設定 -->
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="manager/categories">商品カテゴリー</a>
-    <a class="dropdown-item" href="#">メニュー2</a>
-  </div><!-- /.dropdown-menu -->
-</div><!-- /.dropdown -->
+        　　　　　　<a href="#" class="dropdown-toggle" data-toggle="dropdown">マスタ管理<b class="caret"></b></a>
+        　　　　　　<ul class="dropdown-menu">
+                 <li><a href="/manager/categories">商品カテゴリ-</a></li>
+                <li><a href="/manager/delivery_companies">配送会社</a></li>
+                </ul>
+                </div>
                   <li class="nav-item">
                     <a class="nav-link" href="#">
                       <span data-feather="shopping-cart"></span>

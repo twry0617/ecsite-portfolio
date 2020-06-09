@@ -1,4 +1,4 @@
-@extends('layouts/manager.application')
+@extends('layouts/manager.manager')
 
 @section('title','配送会社')
 

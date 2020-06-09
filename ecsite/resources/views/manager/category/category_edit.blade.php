@@ -1,4 +1,4 @@
-@extends('layouts/manager.application')
+@extends('layouts/manager.manager')
 
 @section('商品カテゴリー', '編集')
 
