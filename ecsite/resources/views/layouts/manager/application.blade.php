@@ -9,6 +9,8 @@
 </head>
 <body>
  
+ <!-- ヘッダー -->
+ @include('layouts.manager.header')
  
 <div class="container">
  

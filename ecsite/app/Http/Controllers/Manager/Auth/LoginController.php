@@ -48,6 +48,7 @@ class LoginController extends Controller
     public function redirectPath()
     {
         return $this->redirectTo;
+        
     }
 
     /**

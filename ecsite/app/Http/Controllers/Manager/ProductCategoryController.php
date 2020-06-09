@@ -17,7 +17,7 @@ class ProductCategoryController extends Controller
     {
         $categories = Category::paginate(5);
 
-        return view('manager.category_index', ['categories' => $categories]);
+        return view('manager/category/category_index', ['categories' => $categories]);
     }
 
     /**
@@ -27,7 +27,7 @@ class ProductCategoryController extends Controller
      */
     public function create()
     {
-        return view('manager.category_create');
+        return view('manager/category/category_create');
     }
 
     /**
@@ -60,7 +60,7 @@ class ProductCategoryController extends Controller
         //引数で受け取った$idを元にfindでレコードを取得
         $category = Category::find($id);
 
-        return view('manager.category_show', ['category' => $category]);
+        return view('manager/category/category_show', ['category' => $category]);
     }
 
     /**
@@ -73,7 +73,7 @@ class ProductCategoryController extends Controller
     {
         $category = Category::find($id);
 
-        return view('manager.category_edit', ['category' => $category]);
+        return view('manager/category/category_edit', ['category' => $category]);
     }
 
     /**

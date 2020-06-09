@@ -17,7 +17,7 @@ class Delivery_companiesController extends Controller
     {
         $delivery_companies = Delivery_company::paginate(5);
         
-        return view('manager.delivery_company_index', ['delivery_companies' => $delivery_companies]);
+        return view('manager/delivery_company/delivery_company_index', ['delivery_companies' => $delivery_companies]);
     }
 
     /**
@@ -27,7 +27,7 @@ class Delivery_companiesController extends Controller
      */
     public function create()
     {
-        return view ('manager.delivery_company_create');
+        return view ('manager/delivery_company/delivery_company_create');
     }
 
     /**
@@ -59,7 +59,7 @@ class Delivery_companiesController extends Controller
     {
         $delivery_company = Delivery_company::find($id);
 
-        return view('manager.delivery_company_show', ['delivery_company' => $delivery_company]);
+        return view('manager/delivery_company/delivery_company_show', ['delivery_company' => $delivery_company]);
     }
 
     /**
@@ -72,7 +72,7 @@ class Delivery_companiesController extends Controller
     {
         $delivery_company = Delivery_company::find($id);
 
-        return view('manager.delivery_company_edit', ['delivery_company' => $delivery_company]);
+        return view('manager/delivery_company/delivery_company_edit', ['delivery_company' => $delivery_company]);
     }
 
     /**

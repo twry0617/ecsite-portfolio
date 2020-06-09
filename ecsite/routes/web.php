@@ -81,12 +81,12 @@ Route::namespace('Manager')->prefix('manager')->name('manager.')->group(function
         Route::get('/register/verify/{token}', 'InvitationController@emailVerifyComplete')->name('register.verify');
         Route::get('/', 'HomeController@index');
         Route::get('/permission/{token}', 'InvitationController@permissionForm');
-        ROute::post('/invitation', 'InvitationController@permissionInvitation')->name('invitation');
+        Route::post('/invitation', 'InvitationController@permissionInvitation')->name('invitation');
+        Route::resource('categories', 'ProductCategoryController');
+        Route::resource('delivery_companies', 'Delivery_companiesController');
     });
 
-    Route::resource('categories', 'ProductCategoryController');
-
-    Route::resource('delivery_companies', 'Delivery_companiesController');
+    
 
 });
 

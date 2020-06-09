@@ -79,12 +79,17 @@
                       HOME <span class="sr-only">(現位置)</span>
                     </a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">
-                      <span data-feather="file"></span>
-                        マスタ管理
-                    </a>
-                  </li>
+                  <div class="dropdown">
+  <!-- 切替ボタンの設定 -->
+  <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    マスタ管理
+  </button>
+  <!-- ドロップメニューの設定 -->
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="manager/categories">商品カテゴリー</a>
+    <a class="dropdown-item" href="#">メニュー2</a>
+  </div><!-- /.dropdown-menu -->
+</div><!-- /.dropdown -->
                   <li class="nav-item">
                     <a class="nav-link" href="#">
                       <span data-feather="shopping-cart"></span>
