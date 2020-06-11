@@ -58,6 +58,7 @@ Route::namespace('Supplier')->prefix('supplier')->name('supplier.')->group(funct
         Route::get('/', 'HomeController@index')->name('home');
     });
 
+
 });
 /*
 |--------------------------------------------------------------------------
@@ -83,4 +84,10 @@ Route::namespace('Manager')->prefix('manager')->name('manager.')->group(function
         ROute::post('/invitation', 'InvitationController@permissionInvitation')->name('invitation');
     });
 
+    Route::resource('categories', 'ProductCategoryController');
+
+    Route::resource('delivery_companies', 'Delivery_companiesController');
+
 });
+
+
