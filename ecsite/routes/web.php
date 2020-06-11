@@ -17,7 +17,7 @@
 |--------------------------------------------------------------------------
 */
 
-Route::namespace('Consumer')->prefix('consumer')->name('consumer.')->group(function () {
+Route::namespace('Consumer')->name('consumer.')->group(function () {
     Auth::routes();
 
 /*
@@ -27,7 +27,7 @@ Route::namespace('Consumer')->prefix('consumer')->name('consumer.')->group(funct
 */
 
     Route::middleware('auth:consumer')->group(function () {
-        Route::get('home', 'HomeController@index')->name('home');
+        Route::get('/', 'HomeController@index')->name('home');
     });
 
 });
@@ -39,7 +39,14 @@ Route::namespace('Consumer')->prefix('consumer')->name('consumer.')->group(funct
 */
 
 Route::namespace('Supplier')->prefix('supplier')->name('supplier.')->group(function () {
-    Auth::routes();
+    Auth::routes([
+        'register' => false,
+    ]);
+    Route::get('/invitation', 'InvitationController@invitationEmailForm');
+    Route::post('/invitation', 'InvitationController@invitationEmail')->name('invitation');
+    Route::get('/register/verify/{token}', 'InvitationController@emailVerifyComplete')->name('register.verify');
+    Route::post('/register/verify/{token}', 'InvitationController@create')->name('register');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -48,7 +55,7 @@ Route::namespace('Supplier')->prefix('supplier')->name('supplier.')->group(funct
 */
 
     Route::middleware('auth:supplier')->group(function () {
-        Route::get('home', 'HomeController@index')->name('home');
+        Route::get('/', 'HomeController@index')->name('home');
     });
 
 });
@@ -70,7 +77,10 @@ Route::namespace('Manager')->prefix('manager')->name('manager.')->group(function
 */
 
     Route::middleware('auth:manager')->group(function () {
-        Route::get('home', 'HomeController@index')->name('home');
+        Route::get('/register/verify/{token}', 'InvitationController@emailVerifyComplete')->name('register.verify');
+        Route::get('/', 'HomeController@index');
+        Route::get('/permission/{token}', 'InvitationController@permissionForm');
+        ROute::post('/invitation', 'InvitationController@permissionInvitation')->name('invitation');
     });
 
 });

@@ -18,7 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style>body{background-color: #87CEFA;}</style>
+    <style>body{background-color: #F0E68C;}</style>
 </head>
 <body>
     <div id="app">
@@ -42,13 +42,8 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('consumer.login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('manager.login') }}">{{ __('Login') }}</a>
                             </li>
-                            @if (Route::has('consumer.register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('consumer.register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -56,13 +51,13 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('consumer.logout') }}"
+                                    <a class="dropdown-item" href="{{ route('manager.logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('consumer.logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('manager.logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
                                 </div>
@@ -73,9 +68,58 @@
             </div>
         </nav>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+        <div class="container-fluid">
+          <div class="row">
+            <nav id="sidebarMenu" class="col-md-2 col-lg-2 d-md-block bg-light sidebar collapse">
+              <div class="sidebar-sticky pt-3">
+                <ul class="nav flex-column">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="/manager/">
+                      <span data-feather="home"></span>
+                      HOME <span class="sr-only">(現位置)</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">
+                      <span data-feather="file"></span>
+                        マスタ管理
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">
+                      <span data-feather="shopping-cart"></span>
+                        店舗管理
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/manager/invitation">
+                      <span data-feather="users"></span>
+                      招待
+                    </a>
+                  </li>
+                </ul>
+
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                  <span>レポート</span>
+                  <a class="d-flex align-items-center text-muted" href="#">
+                    <span data-feather="plus-circle"></span>
+                  </a>
+                </h6>
+                <ul class="nav flex-column mb-2">
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">
+                      <span data-feather="file-text"></span>
+                      売り上げレポート
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+            <main class="col-md-10 ml-sm-auto col-lg-10 px-md-4">
+              @yield('content')
+            </main>
+          </div>
+        </div>
     </div>
 </body>
 </html>
