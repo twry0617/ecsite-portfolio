@@ -55,7 +55,14 @@ Route::namespace('Supplier')->prefix('supplier')->name('supplier.')->group(funct
 */
 
     Route::middleware('auth:supplier')->group(function () {
-        Route::get('/', 'HomeController@index')->name('home');
+        Route::get('/', 'ProductController@index')->name('product.list');
+        Route::get('/product/{product}','ProductController@show');
+        Route::get('/product/add', 'ProductController@create');
+        Route::post('/product/add', 'ProductController@store');
+        Route::get('/product/{product}/edit', 'ProductController@edit');
+        Route::post('/product/{product}/edit', 'ProductController@update');
+        Route::get('/product/{product}/delete', 'ProductController@showDelete');
+        Route::delete('/product/{product}', 'ProductController@destroy');
     });
 
 });
