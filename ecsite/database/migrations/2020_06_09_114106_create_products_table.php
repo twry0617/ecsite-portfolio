@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\ProductStatus;
 
 class CreateProductsTable extends Migration
 {
@@ -16,12 +17,12 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('supplier_id')->unsigned();
-            $table->string('name', 100);
-            $table->string('code', 45);
+            $table->string('name', 100)->unique();
+            $table->string('code', 45)->unique();
             $table->string('description', 500);
             $table->integer('price');
             $table->integer('stock');
-            $table->string('status', 45);
+            $table->string('status', 45)->default(ProductStatus::ON_SALE);
             $table->timestamps();
 
             $table->foreign('supplier_id')->references('id')->on('suppliers');
