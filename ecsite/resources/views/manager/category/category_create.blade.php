@@ -6,15 +6,14 @@
 
 <form action="/manager/categories" method="post">
 
-{{ csrf_field() }}
+    {{ csrf_field() }}
 
-<div>
-<label for="title">商品カテゴリー</label>
-<input type="text" name="name" placeholder="nameを入れる">
-</div>
-<div>
-<input type="submit" value="送信">
-</div>
+    <div>
+        <label for="title">商品カテゴリー</label>
+        <input type="text" name="name" placeholder="nameを入れる">
+    </div>
+    <div>
+        <input type="submit" value="送信">
+    </div>
 </form>
 @endsection
-

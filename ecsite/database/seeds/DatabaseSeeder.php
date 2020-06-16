@@ -18,6 +18,6 @@ class DatabaseSeeder extends Seeder
             CategoriesTableSeeder::class,
             Delivery_companiesTableSeeder::class,
 
-            ]);
+        ]);
     }
 }

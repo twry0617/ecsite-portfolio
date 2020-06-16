@@ -9,8 +9,7 @@
       {{ csrf_field() }}
       <input type="hidden" name="_method" value="delete">
       <input type="submit" name="" value="削除する">
-      </form>
+</form>
 <a href="/manager/categories">一覧に戻る</a>
 
 @endsection
-
