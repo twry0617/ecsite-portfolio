@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Manager;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Delivery_company;
+use App\DeliveryCompany;
 
-class Delivery_companiesController extends Controller
+class DeliveryCompaniesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class Delivery_companiesController extends Controller
      */
     public function index()
     {
-        $delivery_companies = Delivery_company::paginate(5);
+        $delivery_companies = DeliveryCompany::paginate(5);
         
         return view('manager/delivery_company/delivery_company_index', ['delivery_companies' => $delivery_companies]);
     }

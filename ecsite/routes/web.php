@@ -83,7 +83,7 @@ Route::namespace('Manager')->prefix('manager')->name('manager.')->group(function
         Route::get('/permission/{token}', 'InvitationController@permissionForm');
         Route::post('/invitation', 'InvitationController@permissionInvitation')->name('invitation');
         Route::resource('categories', 'ProductCategoryController');
-        Route::resource('delivery_companies', 'Delivery_companiesController');
+        Route::resource('delivery_companies', 'DeliveryCompaniesController');
     });
 
     
