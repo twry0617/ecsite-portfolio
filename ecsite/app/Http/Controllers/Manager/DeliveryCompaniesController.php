@@ -15,9 +15,9 @@ class DeliveryCompaniesController extends Controller
      */
     public function index()
     {
-        $delivery_companies = DeliveryCompany::paginate(5);
-        
-        return view('manager/delivery_company/delivery_company_index', ['delivery_companies' => $delivery_companies]);
+        $deliverycompanies = DeliveryCompany::paginate(5);
+
+        return view('manager/delivery_company/delivery_company_index', ['deliverycompanies' => $deliverycompanies]);
     }
 
     /**
@@ -27,7 +27,7 @@ class DeliveryCompaniesController extends Controller
      */
     public function create()
     {
-        return view ('manager/delivery_company/delivery_company_create');
+        return view('manager/delivery_company/delivery_company_create');
     }
 
     /**
@@ -38,14 +38,9 @@ class DeliveryCompaniesController extends Controller
      */
     public function store(Request $request)
     {
-        $delivery_company = new Delivery_company;
-
-        $delivery_company->name = $request->name;
-        $delivery_company->telephone = $request->telephone;
-        $delivery_company->shipping_cost = $request->shipping_cost;
-
-        $delivery_company->save();
-
+        DeliveryCompany::create(['name' => $request->name]);
+        DeliveryCompany::create(['telephone' => $request->telephone]);
+        DeliveryCompany::create(['shipping_cost' => $request->shipping_cost]);
         return redirect('manager/delivery_companies');
     }
 
@@ -57,9 +52,9 @@ class DeliveryCompaniesController extends Controller
      */
     public function show($id)
     {
-        $delivery_company = Delivery_company::find($id);
+        $deliverycompany = DeliveryCompany::find($id);
 
-        return view('manager/delivery_company/delivery_company_show', ['delivery_company' => $delivery_company]);
+        return view('manager/delivery_company/delivery_company_show', ['delivery_company' => $deliverycompany]);
     }
 
     /**
@@ -70,9 +65,9 @@ class DeliveryCompaniesController extends Controller
      */
     public function edit($id)
     {
-        $delivery_company = Delivery_company::find($id);
+        $deliverycompany = DeliveryCompany::find($id);
 
-        return view('manager/delivery_company/delivery_company_edit', ['delivery_company' => $delivery_company]);
+        return view('manager/delivery_company/delivery_company_edit', ['deliverycompany' => $deliverycompany]);
     }
 
     /**
@@ -84,11 +79,13 @@ class DeliveryCompaniesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $delivery_company = Delivery_company::find($id);
+        $deliverycompany = DeliveryCompany::find($id);
 
-        $delivery_company->name = $request->name;
-        $delivery_company->telephone = $request->telephone;
-        $delivery_company->shipping_cost = $request->shipping_cost;
+        $deliverycompany->name = $request->name;
+        $deliverycompany->telephone = $request->telephone;
+        $deliverycompany->shipping_cost = $request->shipping_cost;
+
+        $deliverycompany->save();
 
         return redirect('/manager/delivery_companies');
     }
@@ -101,9 +98,9 @@ class DeliveryCompaniesController extends Controller
      */
     public function destroy($id)
     {
-        $delivery_company = Delivery_company::find($id);
+        $deliverycompany = DeliveryCompany::find($id);
 
-        $delivery_company->delete();
+        $deliverycompany->delete();
 
         return redirect('manager/delivery_companies');
     }

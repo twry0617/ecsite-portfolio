@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Manager;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Category;
+use App\ProductCategory;
 
 class ProductCategoryController extends Controller
 {
@@ -15,7 +15,7 @@ class ProductCategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate(5);
+        $categories = ProductCategory::paginate(5);
 
         return view('manager.category.category_index', ['categories' => $categories]);
     }
@@ -38,15 +38,9 @@ class ProductCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //モデルからインスタンスを生成
-        $category = new Category;
-        //$requestにformからのデータが格納されているため以下のようにそれぞれ代入する
-        $category->name = $request->name;
-        //保存
-        $category->save();
+        ProductCategory::create(['name' => $request->name]);
         //リダイレクト
         return redirect('/manager/categories');
-
     }
 
     /**
@@ -58,7 +52,7 @@ class ProductCategoryController extends Controller
     public function show($id)
     {
         //引数で受け取った$idを元にfindでレコードを取得
-        $category = Category::find($id);
+        $category = ProductCategory::find($id);
 
         return view('manager/category/category_show', ['category' => $category]);
     }
@@ -71,7 +65,7 @@ class ProductCategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($id);
+        $category = ProductCategory::find($id);
 
         return view('manager/category/category_edit', ['category' => $category]);
     }
@@ -85,7 +79,7 @@ class ProductCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category = Category::find($id);
+        $category = ProductCategory::find($id);
 
         $category->name = $request->name;
 
@@ -102,7 +96,7 @@ class ProductCategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::find($id);
+        $category = ProductCategory::find($id);
 
         $category->delete();
 

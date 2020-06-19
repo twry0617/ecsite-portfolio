@@ -25,7 +25,7 @@ class UpdateDeliveryCompaniesTable extends Migration
      */
     public function down()
     {
-        Schema::table('delivery_comanies', function (Blueprint $table) {
+        Schema::table('delivery_companies', function (Blueprint $table) {
             //
         });
     }
