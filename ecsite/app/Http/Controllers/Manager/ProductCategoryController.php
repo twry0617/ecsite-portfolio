@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Manager;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\ProductCategory;
+use App\Http\Requests\ProductCategoryRequest;
 
 class ProductCategoryController extends Controller
 {
@@ -36,7 +37,7 @@ class ProductCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductCategoryRequest $request)
     {
         ProductCategory::create(['name' => $request->name]);
         //リダイレクト
@@ -77,7 +78,7 @@ class ProductCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update( ProductCategoryRequest $request, $id)
     {
         $category = ProductCategory::find($id);
 
@@ -102,4 +103,5 @@ class ProductCategoryController extends Controller
 
         return redirect('/manager/categories');
     }
+    
 }

@@ -8,6 +8,10 @@
 
     {{ csrf_field() }}
 
+    @if ($errors->has('name'))
+  <p>{{$errors->first('name')}}</p>
+  @endif
+  
     <div>
         <label for="title">商品カテゴリー</label>
         <input type="text" name="name" placeholder="nameを入れる">

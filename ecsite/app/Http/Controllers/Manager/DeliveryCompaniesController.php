@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Manager;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\DeliveryCompany;
+use App\Http\Requests\DeliveryCompaniesRequest;
 
 class DeliveryCompaniesController extends Controller
 {
@@ -36,7 +37,7 @@ class DeliveryCompaniesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DeliveryCompaniesRequest $request)
     {
         DeliveryCompany::create(['name' => $request->name]);
         DeliveryCompany::create(['telephone' => $request->telephone]);
@@ -77,7 +78,7 @@ class DeliveryCompaniesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DeliveryCompaniesRequest $request, $id)
     {
         $deliverycompany = DeliveryCompany::find($id);
 
