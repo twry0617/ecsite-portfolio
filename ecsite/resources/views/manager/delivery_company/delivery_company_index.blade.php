@@ -17,17 +17,17 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($delivery_companies as $delivery_company)
+        @foreach ($deliverycompanies as $deliverycompany)
         <tr>
-            <td>{{$delivery_company->id}}</td>
-            <td>{{$delivery_company->name}}</td>
-            <td>{{$delivery_company->telephone}}</td>
-            <td>{{$delivery_company->shipping_cost}}
+            <td>{{$deliverycompany->id}}</td>
+            <td>{{$deliverycompany->name}}</td>
+            <td>{{$deliverycompany->telephone}}</td>
+            <td>{{$deliverycompany->shipping_cost}}
             <td></td>
             <td>
-                <a href="delivery_companies/{{$delivery_company->id}}" class="btn btn-primary btn-sm">詳細を表示</a>
-                <a href="delivery_companies/{{$delivery_company->id}}/edit" class="btn btn-primary btn-sm">編集する</a>
+                <a href="delivery_companies/{{$deliverycompany->id}}" class="btn btn-primary btn-sm">詳細を表示</a>
+                <a href="delivery_companies/{{$deliverycompany->id}}/edit" class="btn btn-primary btn-sm">編集する</a>
                 @endforeach
 </table>
-{{$delivery_companies->links()}}
+{{$deliverycompanies->links()}}
 @endsection
