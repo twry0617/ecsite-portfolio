@@ -8,12 +8,12 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\EmailVerification;
 
-class EmailVerify extends Mailable
+class InvitationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
-     * Supplierインスタンス
+     * EmailVerificationインスタンス
      *
      * @var EmailVerification
      */
@@ -36,9 +36,9 @@ class EmailVerify extends Mailable
      */
     public function build()
     {
-
-        return $this->subject('新規登録リンク')
-                    ->view('mail.pre_register')
+        return $this->subject('店舗登録申請が届きました。')
+                    ->from($this->emailVerification->email)
+                    ->view('mail.invitation')
                     ->with(['token' => $this->emailVerification->token]);
     }
 }

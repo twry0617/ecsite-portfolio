@@ -15,6 +15,7 @@ use App\Models\EmailVerification;
 use Illuminate\Support\Facades\Log;
 use DB;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\PreInvitationRegister;
 
 class InvitationController extends Controller
 {
@@ -40,61 +41,64 @@ class InvitationController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * 新規登録申請許可フォーム
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @param string $token
+     * @return View
      */
-    protected function email_validator(array $data)
+    public function permissionForm(string $token)
     {
-        return Validator::make($data, [
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:suppliers'],
+        // 有効なtokenか確認
+        $emailVerification = EmailVerification::findByToken($token);
+        $email = $emailVerification->email;
+        return view('manager.auth.invitation', [
+            'email' => $email,
+            'token' => $token,
         ]);
-    }
-
-    /**
-     * 招待フォーム
-     *
-     * @return view
-     */
-    public function emailVerificationForm()
-    {
-        return view('manager.auth.invitation');
     }
 
     /**
      * 仮登録
      *
-     * @param Request $request
+     * @param PreInvitationRegister $request
      * @param EmailVerification $emailVerification
      * @return view
      */
-    public function emailVerification(Request $request, EmailVerification $emailVerification)
+    public function emailVerification(PreInvitationRegister $request, EmailVerification $emailVerification)
     {
-        $validator = $this->email_validator($request->all());
-        if ($validator->fails()) {
-            return view('manager.auth.invitation')
+        $emailVerification = EmailVerification::build($request->email);
+        DB::beginTransaction();
+        try {
+            $emailVerification->saveOrFail();
+            DB::commit();
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            Log::warning("メールアドレス変更処理に失敗しました。 {$e->getMessage()}", $e->getTrace());
+            return back()
                 ->with([
-                    'email' => $request->email,
-                ])
-                ->withErrors($validator);
-        } else {
-            $emailVerification = EmailVerification::build($request->email);
-            DB::beginTransaction();
-            try {
-                $emailVerification->saveOrFail();
-                DB::commit();
-            } catch (\Throwable $e) {
-                DB::rollBack();
-                Log::warning("メールアドレス変更処理に失敗しました。 {$e->getMessage()}", $e->getTrace());
-                return back()
-                    ->with([
-                        'email' => $request->email
-                    ])->withErrors(['error' => 'メールアドレスの登録に失敗しました。']);
-            }
-            Mail::to($request->email)->send(new \App\Mail\EmailVerify($emailVerification));
-
-            return back()->with('flash_message', '招待メールを送りました');
+                    'email' => $request->email
+                ])->withErrors(['error' => 'メールアドレスの登録に失敗しました。']);
         }
+        Mail::to($request->email)->send(new \App\Mail\EmailVerify($emailVerification));
+
+        return back()->with('flash_message', '招待メールを送りました');
+    }
+
+    /**
+     * トークンが有効か確認し、supplier登録希望者へ遷移させる
+     *
+     * @param string $token
+     * @return view
+     */
+    public function permissionInvitation(Request $request)
+    {
+        // 有効なtokenか確認
+        $token = $request->token;
+        $emailVerification = EmailVerification::findByToken($token);
+        if (empty($emailVerification) || $emailVerification->isRegister()) {
+            return view('errors.email_verify');
+        }
+        Mail::to($emailVerification->email)->send(new \App\Mail\EmailVerify($emailVerification));
+        return back()->with('flash_message', '申請許可メールを送りました');
     }
 }

@@ -15,6 +15,8 @@ use App\Models\EmailVerification;
 use Illuminate\Support\Facades\Log;
 use DB;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\PreInvitationRegister;
+use App\Http\Requests\InvitationRegister;
 
 class InvitationController extends Controller
 {
@@ -67,76 +69,40 @@ class InvitationController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function email_validator(array $data)
-    {
-        return Validator::make($data, [
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:suppliers'],
-        ]);
-    }
-
-    /**
-     * 本登録のバリデーション
-     *
-     * @param array $data
-     * @return Validator
-     */
-    protected function create_validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
-    }
-
-    /**
      * 招待フォーム
      *
      * @return view
      */
-    public function emailVerificationForm()
+    public function invitationEmailForm()
     {
         return view('supplier.auth.invitation');
     }
 
     /**
-     * 仮登録
+     * 登録申請
      *
-     * @param Request $request
+     * @param PreInvitationRegister $request
      * @param EmailVerification $emailVerification
      * @return view
      */
-    public function emailVerification(Request $request, EmailVerification $emailVerification)
+    public function invitationEmail(PreInvitationRegister $request, EmailVerification $emailVerification, $hours = 1)
     {
-        $validator = $this->email_validator($request->all());
-        if ($validator->fails()) {
-            return view('supplier.auth.invitation')
+        $emailVerification = EmailVerification::build($request->email);
+        DB::beginTransaction();
+        try {
+            $emailVerification->saveOrFail();
+            DB::commit();
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            Log::warning("メールアドレス変更処理に失敗しました。 {$e->getMessage()}", $e->getTrace());
+            return back()
                 ->with([
-                    'email' => $request->email,
-                ])
-                ->withErrors($validator);
-        } else {
-            $emailVerification = EmailVerification::build($request->email);
-            DB::beginTransaction();
-            try {
-                $emailVerification->saveOrFail();
-                DB::commit();
-            } catch (\Throwable $e) {
-                DB::rollBack();
-                Log::warning("メールアドレス変更処理に失敗しました。 {$e->getMessage()}", $e->getTrace());
-                return back()
-                    ->with([
-                        'email' => $request->email
-                    ])->withErrors(['error' => 'メールアドレスの登録に失敗しました。']);
-            }
-            Mail::to($request->email)->send(new \App\Mail\EmailVerify($emailVerification));
-
-            return back()->with('flash_message', '招待メールを送りました');
+                    'email' => $request->email
+                ])->withErrors(['error' => 'メールアドレスの登録に失敗しました。']);
         }
+        Mail::to('ecsite@example.com')->send(new \App\Mail\InvitationMail($emailVerification));
+
+        return back()->with('flash_message', '登録申請を行いました');
     }
 
     /**
@@ -173,34 +139,24 @@ class InvitationController extends Controller
     /**
      * 本登録
      *
-     * @param Request $request
+     * @param InvitationRegister $request
      * @param string $token
      * @return view
      */
-    protected function create(Request $request, string $token)
+    protected function create(InvitationRegister $request, string $token)
     {
-        $validator = $this->create_validator($request->all());
-        if ($validator->fails()) {
-            return view('supplier.auth.register')
-                ->with([
-                    'token' => $request->token,
-                    'name' => $request->name,
-                ])
-                ->withErrors($validator);
-        } else {
-            $emailVerification = EmailVerification::findByToken($token);
-            $supplier = Supplier::create([
-                'name' => $request->name,
-                'email' => $emailVerification->email,
-                'password' => Hash::make($request->password),
-            ]);
-            $emailVerification->register();
-            $emailVerification->update();
+        $emailVerification = EmailVerification::findByToken($token);
+        $supplier = Supplier::create([
+            'name' => $request->name,
+            'email' => $emailVerification->email,
+            'password' => Hash::make($request->password),
+        ]);
+        $emailVerification->register();
+        $emailVerification->update();
 
-            $this->guard()->login($supplier);
+        $this->guard()->login($supplier);
 
-            return $this->registered($request, $supplier)
-            ?: redirect($this->redirectPath());;
-        }
+        return $this->registered($request, $supplier)
+        ?: redirect($this->redirectPath());;
     }
 }

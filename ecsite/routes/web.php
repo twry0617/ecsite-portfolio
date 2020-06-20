@@ -42,10 +42,10 @@ Route::namespace('Supplier')->prefix('supplier')->name('supplier.')->group(funct
     Auth::routes([
         'register' => false,
     ]);
-    Route::get('/invitation', 'InvitationController@emailVerificationForm');
-    Route::post('/invitation', 'InvitationController@emailVerification')->name('invitation');
+    Route::get('/invitation', 'InvitationController@invitationEmailForm');
+    Route::post('/invitation', 'InvitationController@invitationEmail')->name('invitation');
     Route::get('/register/verify/{token}', 'InvitationController@emailVerifyComplete')->name('register.verify');
-    Route::post('/verify/{token}', 'InvitationController@create')->name('register');
+    Route::post('/register/verify/{token}', 'InvitationController@create')->name('register');
 
 
 /*
@@ -84,9 +84,10 @@ Route::namespace('Manager')->prefix('manager')->name('manager.')->group(function
 */
 
     Route::middleware('auth:manager')->group(function () {
+        Route::get('/register/verify/{token}', 'InvitationController@emailVerifyComplete')->name('register.verify');
         Route::get('/', 'HomeController@index');
-        Route::get('/invitation', 'InvitationController@emailVerificationForm');
-        ROute::post('/invitation', 'InvitationController@emailVerification')->name('invitation');
+        Route::get('/permission/{token}', 'InvitationController@permissionForm');
+        ROute::post('/invitation', 'InvitationController@permissionInvitation')->name('invitation');
     });
 
 });

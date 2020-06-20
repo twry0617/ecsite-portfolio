@@ -39,21 +39,38 @@ class EmailVerification extends Model
         parent::__construct($attributes);
     }
 
+    /**
+     * 一致したトークンを返す
+     *
+     * @param string $token
+     * @return EmailVerification
+     */
     public static function findByToken($token)
     {
         return self::where('token', '=', $token)->first();
     }
 
+    /**
+     * ステータスをメールアドレス認証済に変更
+     */
     public function mailVerify()
     {
         $this->status = self::MAIL_VERIFY;
     }
 
+    /**
+     * Undocumented function
+     *
+     * @return EmailVerification
+     */
     public function isRegister()
     {
         return $this->status === self::REGISTER;
     }
 
+    /**
+     * ステータスを本登録完了済に変更
+     */
     public function register()
     {
         $this->status = self::REGISTER;
