@@ -50,11 +50,9 @@ class ProductCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(ProductCategory $category)
     {
-        //引数で受け取った$idを元にfindでレコードを取得
-        $category = ProductCategory::find($id);
-
+        
         return view('manager/category/category_show', ['category' => $category]);
     }
 
@@ -64,10 +62,9 @@ class ProductCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(ProductCategory $category)
     {
-        $category = ProductCategory::find($id);
-
+        
         return view('manager/category/category_edit', ['category' => $category]);
     }
 
@@ -78,9 +75,8 @@ class ProductCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update( ProductCategoryRequest $request, $id)
+    public function update(ProductCategoryRequest $request, ProductCategory $category)
     {
-        $category = ProductCategory::find($id);
 
         $category->name = $request->name;
 
@@ -95,9 +91,8 @@ class ProductCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(ProductCategory $category)
     {
-        $category = ProductCategory::find($id);
 
         $category->delete();
 

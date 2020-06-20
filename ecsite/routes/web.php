@@ -84,6 +84,9 @@ Route::namespace('Manager')->prefix('manager')->name('manager.')->group(function
         Route::post('/invitation', 'InvitationController@permissionInvitation')->name('invitation');
         Route::resource('categories', 'ProductCategoryController');
         Route::resource('delivery_companies', 'DeliveryCompaniesController');
+        Route::get('manager/categories/{category}','ProductCategoryController@show');
+        Route::get('manager/categories/{category}','ProductCategoryController@edit');
+        Route::get('manager/categories/{category}','ProductCategoryController@update');
     });
 
     
