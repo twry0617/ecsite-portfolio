@@ -39,9 +39,12 @@ class DeliveryCompaniesController extends Controller
      */
     public function store(DeliveryCompaniesRequest $request)
     {
-        DeliveryCompany::create(['name' => $request->name]);
-        DeliveryCompany::create(['telephone' => $request->telephone]);
-        DeliveryCompany::create(['shipping_cost' => $request->shipping_cost]);
+        DeliveryCompany::create([
+            'name' => $request->name,
+            'telephone' => $request->telephone,
+            'shipping_cost' => $request->shipping_cost,
+        ]);
+
         return redirect('manager/delivery_companies');
     }
 
@@ -51,11 +54,10 @@ class DeliveryCompaniesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(DeliveryCompany $delivery_company)
     {
-        $deliverycompany = DeliveryCompany::find($id);
 
-        return view('manager/delivery_company/delivery_company_show', ['delivery_company' => $deliverycompany]);
+        return view('manager/delivery_company/delivery_company_show', ['delivery_company' => $delivery_company]);
     }
 
     /**
@@ -64,11 +66,11 @@ class DeliveryCompaniesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(DeliveryCompany $delivery_company)
     {
-        $deliverycompany = DeliveryCompany::find($id);
 
-        return view('manager/delivery_company/delivery_company_edit', ['deliverycompany' => $deliverycompany]);
+
+        return view('manager/delivery_company/delivery_company_edit', ['deliverycompany' => $delivery_company]);
     }
 
     /**
@@ -78,15 +80,15 @@ class DeliveryCompaniesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(DeliveryCompaniesRequest $request, $id)
+    public function update(DeliveryCompaniesRequest $request, DeliveryCompany $delivery_company)
     {
-        $deliverycompany = DeliveryCompany::find($id);
 
-        $deliverycompany->name = $request->name;
-        $deliverycompany->telephone = $request->telephone;
-        $deliverycompany->shipping_cost = $request->shipping_cost;
 
-        $deliverycompany->save();
+        $delivery_company->name = $request->name;
+        $delivery_company->telephone = $request->telephone;
+        $delivery_company->shipping_cost = $request->shipping_cost;
+
+        $delivery_company->save();
 
         return redirect('/manager/delivery_companies');
     }
@@ -97,11 +99,10 @@ class DeliveryCompaniesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(DeliveryCompany $delivery_company)
     {
-        $deliverycompany = DeliveryCompany::find($id);
 
-        $deliverycompany->delete();
+        $delivery_company->delete();
 
         return redirect('manager/delivery_companies');
     }
