@@ -19,14 +19,14 @@
   @endif
     <div>
         <label for="">電話番号</label>
-        <input type="text" name="telephone" plecehoder="電話番号を入れる">
+        <input type="text" name="telephone" placeholder="電話番号を入れる">
     </div>
     @if ($errors->has('shipping_cost'))
   <p>{{$errors->first('shipping_cost')}}</p>
   @endif
     <div>
         <label for="">送料</label>
-        <input type="text" name="shipping_cost" plecehoder="送料を入れる">
+        <input type="text" name="shipping_cost" placeholder="送料を入れる">
     </div>
     <div>
         <input type="submit" value="送信">
