@@ -87,6 +87,9 @@ Route::namespace('Manager')->prefix('manager')->name('manager.')->group(function
         Route::get('manager/categories/{category}','ProductCategoryController@show');
         Route::get('manager/categories/{category}','ProductCategoryController@edit');
         Route::get('manager/categories/{category}','ProductCategoryController@update');
+        Route::get('manager/delivery_companies/{delivery_company}','DeliveryCompaniesController@show');
+        Route::get('manager/delivery_companies/{delivery_company}','DeliveryCompaniesController@edit');
+        Route::get('manager/delivery_companies/{delivery_company}','DeliveryCompaniesController@update');
     });
 
     
