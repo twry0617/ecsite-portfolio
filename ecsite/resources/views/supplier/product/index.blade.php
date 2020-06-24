@@ -1,4 +1,4 @@
-@extends('layouts.supplier.app')
+@extends('layouts.supplier.supplier')
 
 @section('content')
     @if(Session::has('flash_message'))
@@ -6,7 +6,7 @@
             {{ session('flash_message') }}
         </div>
     @endif
-    <div class="container">
+    <div class="container mt-5">
         <div class="row justify-content-left">
             @foreach ($productList as $product)
             <div class="col-md-4 mb-2">
