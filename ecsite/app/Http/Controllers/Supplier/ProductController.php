@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Photo;
-use Illuminate\Support\Facades\Log;
+use App\Models\Option;
 
 class ProductController extends Controller
 {
@@ -14,7 +14,7 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function index(Product $product, Photo $photo)
     {
@@ -36,18 +36,30 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('supplier.product.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request, Product $product, Photo $photo, Option $option)
     {
-        //
+        $supplier = $request->user();
+
+        $product->supplier_id = $supplier->id;
+        $product->fill($request->all())->save();
+
+        $photo->product_id = $product->id;
+        $photo->fill($request->all())->save();
+
+        $option->product_id = $product->id;
+        $option->fill($request->all())->save();
+
+        return redirect()->route('supplier.product.list');
+
     }
 
     /**
