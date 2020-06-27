@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class Delivery_companiesTableSeeder extends Seeder
+class DeliveryCompaniesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
