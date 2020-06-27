@@ -23,7 +23,7 @@ class RouteServiceProvider extends ServiceProvider
     public const CONSUMER_HOME = '/';
 
     // Managerのリダイレクト先
-    public const MANAGER_HOME = '/manager';
+    public const MANAGER_HOME = '/manager/categories';
 
     /**
      * Define your route model bindings, pattern filters, etc.
