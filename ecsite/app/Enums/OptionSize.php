@@ -7,10 +7,10 @@ use MyCLabs\Enum\Enum;
 // 定義
 class OptionSize extends Enum
 {
-    const XS = 'xs';
-    const S = 's';
-    const M = 'm';
+    const XS = 'XS';
+    const S = 'S';
+    const M = 'M';
     const L = 'L';
     const XL = 'XL';
-    const NONE = 'none';
+    const NONE = 'NONE';
 }
