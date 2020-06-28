@@ -59,9 +59,9 @@ Route::namespace('Supplier')->prefix('supplier')->name('supplier.')->group(funct
         Route::get('/product/add', 'ProductController@create');
         Route::post('/product/add', 'ProductController@store')->name('product.store');
         Route::get('/product/{product}','ProductController@show');
-        Route::get('/product/{product}/edit', 'ProductController@edit');
+        Route::get('/product/{product}/edit', 'ProductController@edit')->name('product.edit');
         Route::post('/product/{product}/edit', 'ProductController@update');
-        Route::get('/product/{product}/delete', 'ProductController@showDelete');
+        Route::get('/product/{product}/delete', 'ProductController@showDelete')->name('product.delete');
         Route::delete('/product/{product}', 'ProductController@destroy');
     });
 
