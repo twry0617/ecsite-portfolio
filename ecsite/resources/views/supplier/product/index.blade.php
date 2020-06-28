@@ -8,11 +8,11 @@
     @endif
     <div class="container mt-5">
         <div class="row justify-content-left">
-            @foreach ($productList as $product)
+            @foreach ($products as $product)
             <div class="col-md-4 mb-2">
                 <div class="card">
                     <div class="card-header">
-                        <a href="/product/{{ $product }}">{{ $product->name }}</a>
+                        <a href="/supplier/product/{{ $product->id }}">{{ $product->name }}</a>
                     </div>
                     <div class="card-body">
                         {{ $product->price }}円
@@ -35,5 +35,6 @@
             </div>
             @endforeach
         </div>
+        {{ $products->links() }}
     </div>
 @endsection

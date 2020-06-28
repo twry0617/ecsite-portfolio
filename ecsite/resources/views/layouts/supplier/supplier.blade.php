@@ -18,7 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style>body{background-color: #00FA9A;}</style>
+    <style>body{background-color: #00fa9a;}</style>
 </head>
 <body>
 <div id="app">
@@ -51,13 +51,13 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('manager.logout') }}"
+                                <a class="dropdown-item" href="{{ route('supplier.logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
 
-                                <form id="logout-form" action="{{ route('manager.logout') }}" method="POST" style="display: none;">
+                                <form id="logout-form" action="{{ route('supplier.logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
                             </div>

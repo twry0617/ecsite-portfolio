@@ -1,6 +1,15 @@
 @extends('layouts.supplier.supplier')
 
 @section('content')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     @if(Session::has('flash_message'))
         <div class="alert alert-success">
             {{ session('flash_message') }}
@@ -21,7 +30,7 @@
                     </div>
                     <div class="form-group">
                         <label class="col-md-6 mx-auto" for="body">金額</label>
-                        <input class="form-control" type="text" name="price" value="{{ old('price') }}">
+                        <input class="form-control" type="text" name="price" value="{{ old('price') }}">円
                     </div>
                     <div class="form-group">
                         <label class="col-md-6 mx-auto" for="stock">在庫</label>
@@ -34,32 +43,28 @@
                 </div>
                 <div class="">
                     <div class="form-group">
-                        <label class="col col-md-5" for="image">画像1</label>
+                        <label class="col col-md-5" for="photo">画像1</label>
                         <div class="col-md-10">
-                            <input type="file" class="form-control-file" name="image">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col col-md-5" for="image">画像2</label>
-                        <div class="col-md-10">
-                            <input type="file" class="form-control-file" name="image">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col col-md-5" for="image">画像3</label>
-                        <div class="col-md-10">
-                            <input type="file" class="form-control-file" name="image">
+                            <input type="file" class="form-control-file" name="photo[]" multiple>
                         </div>
                     </div>
                 </div>
                 <div>
                     <div class="form-group">
                         <label for="size" class="col col-md-5">サイズ</label>
-                        <input type="text" class="form-control" name="size" value="{{ old('size') }}">
+                        <select class="form-control" name="size" id="size">
+                            @foreach(\App\Enums\OptionSize::values() as $size)
+                                <option value="{{ $size }}">{{ $size }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="color" class="col col-md-5">カラー</label>
-                        <input type="text" class="form-control" name="color" value="{{ old('color') }}">
+                        <select class="form-control" name="color" id="color">
+                            @foreach(\App\Enums\OptionColor::values() as $color)
+                                <option value="{{ $color }}">{{ $color }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="form-block">
