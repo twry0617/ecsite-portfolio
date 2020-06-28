@@ -13,5 +13,7 @@ class Photo extends Model
      */
     protected $fillable = [
         'photo',
+        'created_at',
+        'updated_at',
     ];
 }
