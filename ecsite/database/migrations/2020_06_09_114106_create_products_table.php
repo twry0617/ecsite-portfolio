@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->bigInteger('supplier_id')->unsigned();
             $table->string('name', 100)->unique();
             $table->string('code', 45)->unique();
-            $table->string('description', 500);
+            $table->string('description', 500)->nullable();
             $table->integer('price');
             $table->integer('stock');
             $table->string('status', 45)->default(ProductStatus::ON_SALE);
