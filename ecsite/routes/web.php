@@ -58,6 +58,7 @@ Route::namespace('Supplier')->prefix('supplier')->name('supplier.')->group(funct
         Route::get('/', 'HomeController@index')->name('home');
     });
 
+
 });
 /*
 |--------------------------------------------------------------------------
@@ -80,7 +81,19 @@ Route::namespace('Manager')->prefix('manager')->name('manager.')->group(function
         Route::get('/register/verify/{token}', 'InvitationController@emailVerifyComplete')->name('register.verify');
         Route::get('/', 'HomeController@index');
         Route::get('/permission/{token}', 'InvitationController@permissionForm');
-        ROute::post('/invitation', 'InvitationController@permissionInvitation')->name('invitation');
+        Route::post('/invitation', 'InvitationController@permissionInvitation')->name('invitation');
+        Route::resource('categories', 'ProductCategoryController');
+        Route::resource('delivery_companies', 'DeliveryCompaniesController');
+        Route::get('manager/categories/{category}','ProductCategoryController@show');
+        Route::get('manager/categories/{category}','ProductCategoryController@edit');
+        Route::get('manager/categories/{category}','ProductCategoryController@update');
+        Route::get('manager/delivery_companies/{delivery_company}','DeliveryCompaniesController@show');
+        Route::get('manager/delivery_companies/{delivery_company}','DeliveryCompaniesController@edit');
+        Route::get('manager/delivery_companies/{delivery_company}','DeliveryCompaniesController@update');
     });
 
+    
+
 });
+
+
