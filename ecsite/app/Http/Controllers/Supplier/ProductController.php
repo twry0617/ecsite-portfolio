@@ -75,9 +75,9 @@ class ProductController extends Controller
                 // 画像のpath
                 $path = 'product/' . $request->name . '/' . $filename;
                 // s3のuploadsファイルに追加
-                Storage::disk('local')->put($path, (string)$resize_img, 'public');
+                Storage::disk('s3')->put($path, (string)$resize_img, 'public');
                 // 画像のURLを参照
-                $url = Storage::disk('local')->url($path);
+                $url = Storage::disk('s3')->url($path);
                 $photo->photo = $url;
                 $photo->save();
             }
