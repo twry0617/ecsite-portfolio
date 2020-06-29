@@ -43,7 +43,7 @@
                 </div>
                 <div class="">
                     <div class="form-group">
-                        <label class="col col-md-5" for="photo">画像1</label>
+                        <label class="col col-md-5" for="photo">画像(３つまで選択可）</label>
                         <div class="col-md-10">
                             <input type="file" class="form-control-file" name="photo[]" multiple>
                         </div>
