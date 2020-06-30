@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
             ProductsTablSeeder::class,
             OptionsTableSeeder::class,
             PhotosTableSeeder::class,
+            ProductCategoriesTableSeeder::class,
+            DeliveryCompaniesTableSeeder::class,
         ]);
     }
 }
