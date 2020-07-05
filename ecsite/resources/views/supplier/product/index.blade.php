@@ -12,9 +12,18 @@
             <div class="col-md-4 mb-2">
                 <div class="card">
                     <div class="card-header">
-                        <a href="/supplier/product/{{ $product->id }}">{{ $product->name }}</a>
+                            @if (!count($product->photos))
+                                <img src="{{ asset('image/no-image.jpg') }}" alt="" class="card-img-top">
+                            @else
+                                @foreach ($product->photos as $photo)
+                                    <img src="{{ $photo->photo }}" alt="" class="card-img-top">
+                                @endforeach
+                            @endif
                     </div>
                     <div class="card-body">
+                        <div class="card-title">
+                            <a href="/supplier/product/{{ $product->id }}">{{ $product->name }}</a>
+                        </div>
                         {{ $product->price }}円
                     </div>
                     @auth
