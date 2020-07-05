@@ -9,9 +9,6 @@ use App\Models\Photo;
 use App\Models\Option;
 use App\Http\Requests\ProductStore;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
 {
@@ -21,9 +18,12 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function index(Product $product, Photo $photo)
+    public function index(Product $product)
     {
         $products = $product->paginate(6);
+        foreach ($products as $product) {
+            $product->photos;
+        }
 
         return view('supplier.product.index',[
             'products' => $products
@@ -64,22 +64,8 @@ class ProductController extends Controller
             }
 
             foreach ($request->file('photo') as $image) {
-                $photo = new Photo;
-                $photo->product_id = $product->id;
-                Log::info($image);
-                $extension = $image->getClientOriginalExtension();
-                // 画像の名前を取得
-                $filename = $image->getClientOriginalName();
-                // 画像をリサイズ
-                $resize_img = Image::make($image)->resize(320, 240)->encode($extension);
-                // 画像のpath
-                $path = 'product/' . $request->name . '/' . $filename;
-                // s3のuploadsファイルに追加
-                Storage::disk('s3')->put($path, (string)$resize_img, 'public');
-                // 画像のURLを参照
-                $url = Storage::disk('s3')->url($path);
-                $photo->photo = $url;
-                $photo->save();
+               $product->insertPhoto($image, $request, $product);
+
             }
 
             return $supplier;
