@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('description', 500)->nullable();
             $table->integer('price');
             $table->integer('stock');
-            $table->string('status', 45)->default(ProductStatus::ON_SALE);
+            $table->string('status', 45)->default(ProductStatus::toStringValues()[0]);
             $table->timestamps();
 
             $table->foreign('supplier_id')->references('id')->on('suppliers');
