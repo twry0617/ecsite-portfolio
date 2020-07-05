@@ -8,9 +8,13 @@
         </div>
         <div class="row p-4 mb-3 bg-white rounded shadow-sm">
             <div class="col-lg-6">
-{{--                <div class="text-center mx-auto">--}}
-{{--                    --}} TODO: 画像表示を行う
-{{--                </div>--}}
+                    @if (!count($product->photos))
+                        <img src="{{ asset('image/no-image.jpg') }}" alt="" class="card-img-top">
+                    @else
+                        @foreach ($product->photos as $photo)
+                            <img src="{{ $photo->photo }}" alt="" class="card-img-top">
+                        @endforeach
+                    @endif
             </div>
             <div class="col-lg-6 ">
                 <h2 class="pt-4">金額： {{ $product->price }}円</h2>
