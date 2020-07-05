@@ -19,6 +19,7 @@
 
 Route::namespace('Consumer')->name('consumer.')->group(function () {
     Auth::routes();
+    
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,13 @@ Route::namespace('Consumer')->name('consumer.')->group(function () {
 
     Route::middleware('auth:consumer')->group(function () {
         Route::get('/', 'HomeController@index')->name('home');
+        Route::get('consumer/index', 'ProductController@index');
+        Route::post('consumer/index', 'ProductController@search');
+        Route::get('consumer/index/{product}','ProductController@show');
+       
+        
+        
+       
     });
 
 });
