@@ -6,12 +6,13 @@
         <div class="mx-auto" style="max-width:1200px">
             <h1 style="color:#555555; text-align:center; font-size:1.2em; padding:24px 0px; font-weight:bold;">商品一覧</h1>
             <div class="">
-                <form method="GET" action="/consumer/index">
+                <form method="POST" action="/consumer/index">
+                @csrf
                     @if($errors->has('name'))
                     <p>{{$errors->first('name')}}</p>
                     @endif
                     <p>商品名</p>
-                    <input type="text" name="keyword">
+                    <input type="text" name="keyword" value="{{$keyword}}">
                     @if ($errors->has('amount_from'))
                     <p>{{$errors->first('amount_from')}}</p>
                     @endif
@@ -38,7 +39,7 @@
                     @endforeach
                 </div>
                 <div class="text-center" style="width: 200px;margin: 20px auto;">
-                {{ $products->links() }}
+                    　{{ $products->appends(['keyword' => $keyword, 'amount_from' => $amount_from, 'amount_to' => $amount_to])->links() }}
                 </div>
             </div>
         </div>
