@@ -10,17 +10,17 @@ class ProductStatus extends Enum
     /**
      * 販売中
      */
-    private const ON_SALE = 0;
+    public const ON_SALE = 0;
 
     /**
      * 在庫が残り僅か
      */
-    private const FEW_REMAINING = 1;
+    public const FEW_REMAINING = 1;
 
     /**
      * 在庫切れ
      */
-    private const OUT_OF_STOCK = 2;
+    public const OUT_OF_STOCK = 2;
 
     /**
      * 商品のステータスを文字列と対応させた配列
