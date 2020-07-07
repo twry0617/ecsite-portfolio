@@ -11,6 +11,7 @@ create-project:
 	docker-compose exec app composer require predis/predis
 	docker-compose exec app composer require doctrine/dbal
 	docker-compose exec app composer require laravel/helpers
+	docker-compose exec app composer require myclabs/php-enum
 install-recommend-packages:
 	docker-compose exec app composer require --dev barryvdh/laravel-ide-helper
 	docker-compose exec app composer require --dev beyondcode/laravel-dump-server:1.3.0

@@ -36,4 +36,12 @@ class Supplier extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Supplierのproductを取得
+     */
+    public function products()
+    {
+        return $this->hasMany('App\Models\Product');
+    }
 }

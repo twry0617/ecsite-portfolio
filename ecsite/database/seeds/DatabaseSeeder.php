@@ -15,10 +15,11 @@ class DatabaseSeeder extends Seeder
             ConsumersTableSeeder::class,
             ManagersTableSeeder::class,
             SuppliersTableSeeder::class,
+            ProductsTablSeeder::class,
+            OptionsTableSeeder::class,
+            PhotosTableSeeder::class,
             ProductCategoriesTableSeeder::class,
             DeliveryCompaniesTableSeeder::class,
-            ProductsTabldeSeeder::class,
-
         ]);
     }
 }
