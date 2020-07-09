@@ -12,16 +12,16 @@
                     @endif
                     <p>商品名</p>
                     <input type="text" name="keyword">
-                    @if ($errors->has('amount_from'))
-                    <p>{{$errors->first('amount_from')}}</p>
+                    @if ($errors->has('price'))
+                    <p>{{$errors->first('price')}}</p>
                     @endif
-                    @if ($errors->has('amount_to'))
-                    <p>{{$errors->first('amount_to')}}</p>
+                    @if ($errors->has('price'))
+                    <p>{{$errors->first('price')}}</p>
                     @endif
                     <p>金額</p>
-                    <input type="number" min="0" max="9999" name="amount_from">
+                    <input type="number" min="0" max="9999" name="price_from">
                     ~
-                    <input type="number" min="0" max="9999" name="amount_to">
+                    <input type="number" min="0" max="9999" name="price_to">
                     <input type="submit" value="検索">
                 </form>
                 <div class="d-flex flex-row flex-wrap">

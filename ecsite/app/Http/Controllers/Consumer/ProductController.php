@@ -27,20 +27,20 @@ class ProductController extends Controller
             $query->where('name', 'LIKE', "%{$keyword}%")->paginate(5);
         }
 
-        if (!empty($amount_from)) {
+        if (!empty($price_from)) {
 
-            $query->where('price', '>=', $amount_from);
+            $query->where('price', '>=', $price_from);
         }
 
-        if (!empty($amount_to)) {
+        if (!empty($price_to)) {
 
-            $query->where('price', '<=', $amount_to);
+            $query->where('price', '<=', $price_to);
         }
 
         $products = $query->paginate(10);
 
 
-        return view('consumer.product.', compact('products', 'keyword', 'amount_from', 'amount_to'));
+        return view('consumer.product.', compact('products', 'keyword', 'price_from', 'price_to'));
     }
 
 

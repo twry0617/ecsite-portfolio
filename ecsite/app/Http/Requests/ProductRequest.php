@@ -24,19 +24,14 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'keyword' => 'required|max:1',
+            'keyword' => 'nullable',
 
-            'amount_from' => 'required|integer|between:0,500',
+            'price_from' => 'nullable|integer',
 
-            'amount_to' => 'required|integer|between:500,10000',
+            'price_to' => 'nullable|integer',
         ];
 
     }
 
-    public function messages()
-    {
-        return[
-            'keyword.required' => 'もう1度入力して下さい'
-        ];
-    }
+    
 }
