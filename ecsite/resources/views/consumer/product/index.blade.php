@@ -26,10 +26,10 @@
                 </form>
                 <div class="d-flex flex-row flex-wrap">
                     @foreach($products as $product)
-                    <div class="col-xs-6 col-sm-4 col-md-4 ">
+                    <div class="col-xs-6 col-sm-4 col-md-4">
                         <div class="mycart_box">
                             {{$product->name}} <br>
-                            {{$product->amount}}円<br>
+                            {{$product->price}}円<br>
                             <img src="/image/{{$product->photo1}}" alt="" class="">
                             <br>
                             <a href="/consumer/index/{{ $product->id }}">商品詳細ページへ</a>

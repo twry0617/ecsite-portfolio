@@ -21,10 +21,15 @@ class ProductController extends Controller
     {
         $query = Product::query();
 
+        $keyword = $request->keyword;
+        $price_from = $request->price_from;
+        $price_to = $request->price_to;
+
+
 
         if (!empty($keyword)) {
 
-            $query->where('name', 'LIKE', "%{$keyword}%")->paginate(5);
+            $query->where('name', 'LIKE', "%{$keyword}%");
         }
 
         if (!empty($price_from)) {
@@ -40,7 +45,7 @@ class ProductController extends Controller
         $products = $query->paginate(10);
 
 
-        return view('consumer.product.', compact('products', 'keyword', 'price_from', 'price_to'));
+        return view('consumer.product.index', compact('products', 'keyword', 'price_from', 'price_to'));
     }
 
 
