@@ -61,8 +61,7 @@ Route::namespace('Supplier')->prefix('supplier')->name('supplier.')->group(funct
         Route::get('/product/{product}','ProductController@show');
         Route::get('/product/{product}/edit', 'ProductController@edit')->name('product.edit');
         Route::post('/product/{product}/edit', 'ProductController@update');
-        Route::get('/product/{product}/delete', 'ProductController@showDelete')->name('product.delete');
-        Route::delete('/product/{product}', 'ProductController@destroy');
+        Route::post('/product/{product}/', 'ProductController@destroy')->name('product.delete');
     });
 
 
