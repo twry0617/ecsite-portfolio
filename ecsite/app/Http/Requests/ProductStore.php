@@ -27,8 +27,8 @@ class ProductStore extends FormRequest
     public function rules()
     {
         return [
-            'name'         => ['required', 'string', 'unique:products,name'],
-            'code'         => ['required', 'string', 'unique:products,code'],
+            'name'         => ['required', 'string'],
+            'code'         => ['required', 'string'],
             'description'  => ['string', 'nullable'],
             'price'        => ['required', 'integer', 'min:1'],
             'stock'        => ['required', 'integer', 'min:0'],
