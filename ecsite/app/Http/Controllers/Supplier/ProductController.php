@@ -65,7 +65,6 @@ class ProductController extends Controller
 
             foreach ($request->file('photo') as $image) {
                $product->insertPhoto($image, $request, $product);
-
             }
 
             return $supplier;
@@ -93,34 +92,61 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Product $product
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Product $product)
     {
-        //
+        $product->photos;
+        $product->options;
+
+        return view('supplier.product.edit', [
+            'product' => $product
+        ]);
     }
 
     /**
-     * Update the specified resource in storage.
+     *  Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param ProductStore $request
+     * @param Product $product
+     * @param Option $option
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductStore $request, Product $product, Option $option)
     {
-        //
+        $supplier = DB::transaction(function () use ($request, $product, $option) {
+            $supplier = $request->user();
+            $product->supplier_id = $supplier->id;
+            $product->fill($request->all())->save();
+
+            $option->product_id = $product->id;
+            $option->fill($request->all())->save();
+
+            if (empty($request->file('photo'))) {
+                return redirect()->route('supplier.product.list');
+            }
+
+            foreach ($request->file('photo') as $image) {
+                $product->insertPhoto($image, $request, $product);
+            }
+
+            return $supplier;
+        });
+
+        return redirect()->route('supplier.product.list');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Product $product
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        return redirect()->route('supplier.product.list');
     }
 }

@@ -34,9 +34,9 @@
 {{--            </div>--}}
                 <div class="col-12 pt-3 text-center">
                     <a class="btn btn-lg btn-primary"  href="{{ route('supplier.product.edit', ['product' => $product->id ]) }}">編集</a>
-                    <form class="d-inline" action="{{ route('supplier.product.delete', ['product' => $product->id]) }}" method="get">
+                    <form class="d-inline" action="{{ route('supplier.product.delete', ['product' => $product->id]) }}" method="post">
                         @csrf
-                        <input type="submit" name="delete" value="削除" class=" btn btn-lg btn-danger" onClick="delete_alert(event);return false;">
+                        <input type="submit" name="post" value="削除" class=" btn btn-lg btn-danger">
                     </form>
                 </div>
         </div>

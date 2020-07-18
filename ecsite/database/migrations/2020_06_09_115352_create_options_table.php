@@ -20,7 +20,7 @@ class CreateOptionsTable extends Migration
             $table->string('color', 45);
             $table->timestamps();
 
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 
