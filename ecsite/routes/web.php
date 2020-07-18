@@ -31,6 +31,9 @@ Route::namespace('Consumer')->name('consumer.')->group(function () {
         Route::get('/', 'HomeController@index')->name('home');
         Route::get('consumer/index', 'ProductController@index');
         Route::get('consumer/index/{product}', 'ProductController@show');
+        Route::post('consumer/index/{product}', 'Cartcontroller@store');
+        Route::get('/cartproduct', 'Cartcontroller@index');
+        Route::delete('/cartproduct/{cartproduct}', 'Cartcontroller@destroy');
     });
 });
 
