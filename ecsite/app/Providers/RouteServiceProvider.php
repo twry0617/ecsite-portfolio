@@ -20,7 +20,7 @@ class RouteServiceProvider extends ServiceProvider
     public const SUPPLIER_HOME = '/supplier';
 
     // Consumerのリダイレクト先
-    public const CONSUMER_HOME = '/';
+    public const CONSUMER_HOME = '/consumer/index';
 
     // Managerのリダイレクト先
     public const MANAGER_HOME = '/manager/categories';

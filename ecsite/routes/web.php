@@ -20,7 +20,8 @@
 Route::namespace('Consumer')->name('consumer.')->group(function () {
     Auth::routes();
 
-/*
+
+    /*
 |--------------------------------------------------------------------------
 | Consumer 認証済み
 |--------------------------------------------------------------------------
@@ -28,8 +29,9 @@ Route::namespace('Consumer')->name('consumer.')->group(function () {
 
     Route::middleware('auth:consumer')->group(function () {
         Route::get('/', 'HomeController@index')->name('home');
+        Route::get('consumer/index', 'ProductController@index');
+        Route::get('consumer/index/{product}', 'ProductController@show');
     });
-
 });
 
 /*
@@ -48,7 +50,7 @@ Route::namespace('Supplier')->prefix('supplier')->name('supplier.')->group(funct
     Route::post('/register/verify/{token}', 'InvitationController@create')->name('register');
 
 
-/*
+    /*
 |--------------------------------------------------------------------------
 | Supplier 認証済み
 |--------------------------------------------------------------------------
@@ -63,8 +65,6 @@ Route::namespace('Supplier')->prefix('supplier')->name('supplier.')->group(funct
         Route::post('/product/{product}/edit', 'ProductController@update');
         Route::post('/product/{product}/', 'ProductController@destroy')->name('product.delete');
     });
-
-
 });
 /*
 |--------------------------------------------------------------------------
@@ -77,7 +77,7 @@ Route::namespace('Manager')->prefix('manager')->name('manager.')->group(function
         'register' => false,
     ]);
 
-/*
+    /*
 |--------------------------------------------------------------------------
 | Mamager 認証済み
 |--------------------------------------------------------------------------
@@ -90,16 +90,11 @@ Route::namespace('Manager')->prefix('manager')->name('manager.')->group(function
         Route::post('/invitation', 'InvitationController@permissionInvitation')->name('invitation');
         Route::resource('categories', 'ProductCategoryController');
         Route::resource('delivery_companies', 'DeliveryCompaniesController');
-        Route::get('manager/categories/{category}','ProductCategoryController@show');
-        Route::get('manager/categories/{category}','ProductCategoryController@edit');
-        Route::get('manager/categories/{category}','ProductCategoryController@update');
-        Route::get('manager/delivery_companies/{delivery_company}','DeliveryCompaniesController@show');
-        Route::get('manager/delivery_companies/{delivery_company}','DeliveryCompaniesController@edit');
-        Route::get('manager/delivery_companies/{delivery_company}','DeliveryCompaniesController@update');
+        Route::get('manager/categories/{category}', 'ProductCategoryController@show');
+        Route::get('manager/categories/{category}', 'ProductCategoryController@edit');
+        Route::get('manager/categories/{category}', 'ProductCategoryController@update');
+        Route::get('manager/delivery_companies/{delivery_company}', 'DeliveryCompaniesController@show');
+        Route::get('manager/delivery_companies/{delivery_company}', 'DeliveryCompaniesController@edit');
+        Route::get('manager/delivery_companies/{delivery_company}', 'DeliveryCompaniesController@update');
     });
-
-    
-
 });
-
-
