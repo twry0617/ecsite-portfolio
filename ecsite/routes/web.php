@@ -34,6 +34,8 @@ Route::namespace('Consumer')->name('consumer.')->group(function () {
         Route::post('consumer/index/{product}', 'Cartcontroller@store');
         Route::get('/cartproduct', 'Cartcontroller@index');
         Route::delete('/cartproduct/{cartproduct}', 'Cartcontroller@destroy');
+        Route::get('/buy', 'BuyController@index');
+        Route::post('/buy', 'BuyController@store');
     });
 });
 
